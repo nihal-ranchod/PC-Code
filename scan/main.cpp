@@ -27,13 +27,13 @@ void checkCorrect(std::vector<int>& data) {
 
 int main(){
 
-    std::vector<int> randomList = {2,1,4,0,3,7,6,3}; 
-    // int lenRandomList = pow(2,4);
+    std::vector<int> randomList; 
+    int lenRandomList = pow(2,8);
 
-    // for (int i = 0; i < lenRandomList; i++){
-    //     int randomNum = rand();
-    //     randomList.push_back(randomNum);
-    // }
+    for (int i = 0; i < lenRandomList; i++){
+        int randomNum = rand();
+        randomList.push_back(randomNum);
+    }
 
     //Serial Scan Implementation:
     auto serial_start = std::chrono::high_resolution_clock::now();
@@ -42,9 +42,9 @@ int main(){
     std::chrono::duration<double, std::milli> serial_time = serial_end - serial_start;
     
     printf("Serial Execution time = %f ms\n", serial_time.count());
-    for (int i = 0; i < output_serial.size(); i++) {
-        std::cout <<output_serial[i] << " ";
-    }
+    // for (int i = 0; i < output_serial.size(); i++) {
+    //     std::cout <<output_serial[i] << " ";
+    // }
     checkCorrect(output_serial);
 
     //Parallel Scan openMP Implementation:
@@ -53,10 +53,12 @@ int main(){
     auto omp_end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double, std::milli> omp_time = omp_end - omp_start;
 
-    printf("OMP Execution time = %f ms\n", omp_time.count());
-    for (int i = 0; i < omp_solution.size(); i++) {
-        std::cout << omp_solution[i] << " ";
-    }
+    // printf("OMP Execution time = %f ms\n", omp_time.count());
+    // for (int i = 0; i < omp_solution.size(); i++) {
+    //     std::cout << omp_solution[i] << " ";
+    // }
+    double omp_speedup = serial_time.count() / omp_time.count();
+    printf("OMP Execution time = %f ms, OMP Speedup = %lf\n", omp_time.count(), omp_speedup);
     checkCorrect(omp_solution);
 }
 
