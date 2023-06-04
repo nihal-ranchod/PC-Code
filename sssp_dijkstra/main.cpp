@@ -42,7 +42,11 @@ int main(){
         printf("Serial Execution time = %f ms\n", serial_time.count());
 
         //OpenMP Implementation
-        
+        auto omp_start = std::chrono::high_resolution_clock::now();
+        dijkstra_omp(graph, 0);
+        auto omp_end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double, std::milli> omp_time = omp_end - omp_start;
+        printf("OMP Execution time = %f ms\n", omp_time.count());
 
     } else {
         cout << "Failed to open the input file.\n";
