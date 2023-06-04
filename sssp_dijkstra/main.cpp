@@ -46,7 +46,8 @@ int main(){
         dijkstra_omp(graph, 0);
         auto omp_end = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double, std::milli> omp_time = omp_end - omp_start;
-        printf("OMP Execution time = %f ms\n", omp_time.count());
+        double omp_speedup = serial_time.count() / omp_time.count();
+        printf("OMP Execution time = %f ms, OMP Speedup = %lf\n", omp_time.count(), omp_speedup);
 
     } else {
         cout << "Failed to open the input file.\n";
