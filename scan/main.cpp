@@ -49,7 +49,7 @@ int main(){
 
     //Parallel Scan openMP Implementation:
     auto omp_start = std::chrono::high_resolution_clock::now();
-    std::vector<int> omp_solution = parallelScan(randomList);
+    std::vector<int> omp_solution = scan_omp(randomList);
     auto omp_end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double, std::milli> omp_time = omp_end - omp_start;
 
